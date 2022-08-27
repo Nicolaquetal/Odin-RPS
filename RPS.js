@@ -4,23 +4,14 @@ function getComputerChoice(){
     let i = Math.floor(Math.random()*3);
     return choices[i];
 }
-function getPlayerChoice(){
-    
-    
-    let temp = " "
-    do{
-        temp = prompt("What's your choice?");
-    }while (temp.toLowerCase() !== "paper"  )
 
-    const input = temp;
-    
+function getPlayerChoice(){
+    const input = prompt("What's your choice?"); 
     if (input.toLowerCase()==="rock"){ return "rock"}
     else if (input.toLowerCase()==="paper") {return "paper"}
-    else if (input.toLowerCase()==="scissors") {return "scissors"}
-    
+    else if (input.toLowerCase()==="scissors") {return "scissors"}  
+    else { return "error"}
 }
-
-
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection){
@@ -40,11 +31,16 @@ function playRound(playerSelection, computerSelection) {
         }
     }
   }
+
 function game(){
     let playerScore = 0;
     let computerScore = 0;
     for (let i = 0; i<5; i++){
-        const playerSelection = getPlayerChoice();
+        let temp = getPlayerChoice();
+        while( temp === "error") {
+            temp = getPlayerChoice();
+        }
+        const playerSelection = temp;
         const computerSelection = getComputerChoice();
         console.log(computerSelection)
         result = playRound(playerSelection, computerSelection)
